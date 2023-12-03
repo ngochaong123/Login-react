@@ -1,30 +1,34 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import "./Components/script.js";
 import "./App.css"
 
 
 function App() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const navigate = useNavigate();
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [activePanel, setActivePanel] = useState('active');
+    const navigate = useNavigate();
 
-  const handleLogin = () => {
-    axios.post('http://localhost:5000/login', { username, password })
-      .then(response => {
-        console.log(response.data);
-        // Handle successful login
-        navigate('/Chatbot');
-      })
-      .catch(error => {
-        console.error(error.response.data);
-        // Handle login error
-      });
-  };
+    const handleLogin = () => {
+        axios.post('http://localhost:5000/login', { username, password })
+        .then(response => {
+            console.log(response.data);
+            // Handle successful login
+            navigate('/Chatbot');
+        })
+        .catch(error => {
+            console.error(error.response.data);
+            // Handle login error
+        });
+    };
+
+    const togglePanel = (panel) => {
+        setActivePanel(panel);
+    };
 
   return (
-    <div class="container" id="container">
+    <div className={`container ${activePanel === 'signin' ? 'active' : ''}`} >
         <div class="form-container sign-up">
             <form>
                 <h1>Create Account</h1>
@@ -59,15 +63,15 @@ function App() {
         </div>
         <div class="toggle-container">
             <div class="toggle">
-                <div class="toggle-panel toggle-left">
+                <div className={`toggle-panel toggle-right ${activePanel === 'signin' ? 'active' : ''}`} >
                     <h1>Welcome Back!</h1>
                     <p>Enter your personal details to use all of site features</p>
-                    <button class="hidden" id="login">Sign In</button>
+                    <button className="hidden" onClick={() => togglePanel('signin')} >Sign In</button>
                 </div>
-                <div class="toggle-panel toggle-right">
+                <div className={`toggle-panel toggle-left ${activePanel === 'signup' ? 'active' : ''}`}>
                     <h1>Hello, Friend!</h1>
                     <p>Register with your personal details to use all of site features</p>
-                    <button class="hidden" id="register">Sign Up</button>
+                    <button className="hidden" onClick={() => togglePanel('active')} >Sign Up</button>
                 </div>
             </div>
         </div>

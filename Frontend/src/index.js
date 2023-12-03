@@ -12,7 +12,7 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />} />
-        <Route path="/Chatbot" element={<Chatbot />} />
+          <Route path="/Chatbot" element={<Chatbot />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
