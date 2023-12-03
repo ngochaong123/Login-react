@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import "./App.css"
 import axios from 'axios';
 
 function App() {
@@ -18,15 +19,22 @@ function App() {
   };
 
   return (
-    <div>
-      <h1>Login</h1>
-      <label>Username:</label>
-      <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
-      <br />
-      <label>Password:</label>
-      <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-      <br />
-      <button onClick={handleLogin}>Login</button>
+    <div className='login-container'>
+
+      <fornt className="fornt-login">
+        <h1 style={{textAlign:"center",padding:"5px",color:"white"}}>Login</h1>
+        <div className='space'>
+           <label className='name-login'>Username </label>
+          <input className='input' type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+        </div>
+        <div className='space'>
+          <label className='name-login'>Password </label>
+          <input className='input' type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+        </div>
+        
+        <button onClick={handleLogin} className='buttton'>Login</button>
+      </fornt>
+
     </div>
   );
 }
